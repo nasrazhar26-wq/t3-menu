@@ -29,30 +29,782 @@ footer{text-align:center;color:#7c8780;padding:25px 10px 40px;font-size:12px}
 </main>
 <button class="bottom" onclick="openCartMobile()">🛒 سلة الطلبات <span class="cartCount">0</span></button>
 <div class="modal" id="choose"><div class="sheet"><button class="close" onclick="closeM('choose')">×</button><div id="chooseBody"></div></div></div>
-<div class="modal" id="cartM"><div class="sheet"><button class="close" onclick="closeM('cartM')">×</button><div class="side" style="display:block;position:static;box-shadow:none;border:0"><div class="sideHead">🛒 سلة الطلبات</div><div class="cartItems" id="cartItemsMobile"></div></div><div class="orderForm"><h3>👤 بيانات الطلب</h3><input id="nameM" class="field" placeholder="الاسم الكامل"><input id="phoneM" class="field" placeholder="رقم الجوال"><textarea id="notesM" class="field" placeholder="ملاحظات إضافية"></textarea><button class="wa" onclick="mobileSend()">إرسال الطلب عبر واتساب</button></div></div></div>
-<footer>تي بي سات للعصائر</footer>
-<script>
-const DEFAULT=[{"name": "عراسي سادة", "cat": "العصيرات", "p": [4, 6, 8, 15, 20]}, {"name": "عراسي شنقل", "cat": "العصيرات", "p": [5, 7, 9, 20, 25]}, {"name": "أفوكادو سادة", "cat": "العصيرات", "p": [5, 7, 9, 20, 25]}, {"name": "أفوكادو مانجو", "cat": "العصيرات", "p": [5, 7, 9, 20, 25]}, {"name": "أفوكادو مكسرات", "cat": "العصيرات", "p": [4, 6, 9, 12, 18]}, {"name": "مانجو سادة", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "مانجو حليب", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "شمام سادة", "cat": "العصيرات", "p": [4, 5, 7, 12, 18]}, {"name": "شمام حليب", "cat": "العصيرات", "p": [4, 5, 7, 12, 18]}, {"name": "شمام مانجو", "cat": "العصيرات", "p": [5, 7, 8, 12, 18]}, {"name": "كوكتيل", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "جبي", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "عربي", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "أصفهاني", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "جوافة سادة", "cat": "العصيرات", "p": [5, 7, 9, 12, 18]}, {"name": "جوافة مانجو", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "جوافة شمام", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "باباي", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "كيوي", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "عوار قلب", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "صندو", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "منقوع 2", "cat": "العصيرات", "p": [3, 5, 8, 15, 20]}, {"name": "منعنع سادة", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "منعنع كوكتيل", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "توت أزرق", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "بلاك بيري", "cat": "العصيرات", "p": [4, 6, 8, 12, 18]}, {"name": "ليالي جدة", "cat": "أصناف إضافية", "p": [4, 6, 8, 12, 18]}, {"name": "لمسة عنب", "cat": "أصناف إضافية", "p": [4, 6, 8, 12, 18]}, {"name": "الأسطورة", "cat": "أصناف إضافية", "p": [4, 6, 8, 12, 18]}, {"name": "برتقال", "cat": "خلطات أخرى", "p": [5, 7, 9]}, {"name": "برتقال جزر", "cat": "خلطات أخرى", "p": [5, 7, 9]}, {"name": "أناناس", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "رمان", "cat": "خلطات أخرى", "p": [5, 7, 9]}, {"name": "شمام", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "شمام موز", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "موز سادة", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "موز حليب", "cat": "خلطات أخرى", "p": [4, 6, 7]}, {"name": "ليمون سادة", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "ليمون عدني", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "ليمون زنجبيل", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "ليمون نعناع", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "نعنع ماركس", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "جزر", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "شمام؟", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "زنجبيل", "cat": "خلطات أخرى", "p": [3, 5, 7]}, {"name": "فراولة", "cat": "خلطات أخرى", "p": [4, 6, 8]}, {"name": "تفاح أحمر", "cat": "خلطات أخرى", "p": [4, 5, 7]}, {"name": "تفاح أخضر", "cat": "خلطات أخرى", "p": [4, 5, 7]}, {"name": "عنب", "cat": "خلطات أخرى", "p": [4, 5, 8]}];
-let state=JSON.parse(localStorage.getItem('t3_site_data')||'null')||{menu:DEFAULT,phone:'966507423329',address:'جدة - البغدادية الغربية - شارع المدارس مع تقاطع بئر طيبة - خلف لولو هايبر ماركت'};
-let cart=JSON.parse(localStorage.getItem('t3_cart')||'[]'), active='العصيرات', orderType='pickup';
-const icons={'العصيرات':'🥤','أصناف إضافية':'🎁','خلطات أخرى':'🍊'};
-function saveCart(){localStorage.setItem('t3_cart',JSON.stringify(cart));updateCartCount();renderCart()}
-function updateCartCount(){document.querySelectorAll('.cartCount').forEach(e=>e.textContent=cart.reduce((a,x)=>a+x.qty,0))}
-function cats(){return ['العصيرات','خلطات أخرى','أصناف إضافية']}
-function renderCats(){document.getElementById('cats').innerHTML=cats().map(c=>`<button class="cat ${active===c?'on':''}" onclick="active='${c}';renderCats();renderProducts()"><small>${icons[c]}</small>${c}</button>`).join('')}
-function cup(x){let n=x.name;let bg='#e8f3e7',fruit='🥭';if(/فراولة|عراسي|توت|رمان/.test(n)){bg='#f8dfe1';fruit='🍓'}else if(/أفوكادو|كيوي|جوافة|نعنع|جزر|ليمون/.test(n)){bg='#e2f0cf';fruit='🥑'}else if(/مانجو|برتقال|باباي|أناناس|موز/.test(n)){bg='#fff0bf';fruit='🥭'}else if(/شمام/.test(n)){bg='#ffe2d1';fruit='🍈'}else if(/عنب/.test(n)){bg='#eadcf5';fruit='🍇'}return `<div class="cup" style="background:linear-gradient(145deg,${bg},#fff)"><span class="fruit">${fruit}</span><div class="cupBody" style="background:${bg}"></div></div>`}
-function renderProducts(){let q=(document.getElementById('search').value||'').trim().toLowerCase();let items=state.menu.filter(x=>x.cat===active&&x.name.toLowerCase().includes(q));let labels=x=>x.p.length===5?['صغير','وسط','كبير','جالون وسط','جالون كبير']:['صغير','وسط','كبير'];document.getElementById('sectionTitle').innerHTML=`<h2>${icons[active]} ${active}</h2><a onclick="document.getElementById('search').value='';renderProducts()">عرض الكل</a>`;document.getElementById('products').innerHTML=items.map((x,i)=>`<article class="card">${cup(x)}<div class="name">${x.name}</div><div class="prices">${labels(x).slice(0,3).map((l,j)=>`<div class="price">${l}<b>${x.p[j]} ر.س</b></div>`).join('')}</div>${x.p.length===5?`<div class="gallons"><div class="gallon">جالون وسط<b>${x.p[3]}</b></div><div class="gallon">جالون كبير<b>${x.p[4]}</b></div></div>`:''}<button class="add" onclick="choose(${state.menu.indexOf(x)})">🛒 أضف إلى السلة</button></article>`).join('')||'<div class="hero">لا توجد أصناف مطابقة.</div>'}
-function choose(i){let x=state.menu[i],labs=x.p.length===5?['صغير','وسط','كبير','جالون وسط','جالون كبير']:['صغير','وسط','كبير'];document.getElementById('chooseBody').innerHTML=`<h2>${x.name}</h2>${labs.map((l,j)=>`<button class="send" onclick="addToCart(${i},${j})">${l} — ${x.p[j]} ر.س</button>`).join('')}`;document.getElementById('choose').classList.add('show')}
-function addToCart(i,j){let x=state.menu[i],size=x.p.length===5?['صغير','وسط','كبير','جالون وسط','جالون كبير'][j]:['صغير','وسط','كبير'][j],found=cart.find(a=>a.i===i&&a.j===j);if(found)found.qty++;else cart.push({i,j,name:x.name,size,price:x.p[j],qty:1});saveCart();closeM('choose');if(innerWidth<=950)openCartMobile()}
-function changeQty(k,d){cart[k].qty+=d;if(cart[k].qty<1)cart.splice(k,1);saveCart()}
-function renderCart(){let el=document.getElementById('cartItems');let total=cart.reduce((a,x)=>a+x.price*x.qty,0);el.innerHTML=cart.length?cart.map((x,k)=>`<div class="cartItem"><div class="thumb">${/فراولة|عراسي|توت/.test(x.name)?'🍓':/أفوكادو|كيوي|جوافة/.test(x.name)?'🥑':'🥭'}</div><div><div class="ciName">${x.name}</div><div class="ciSub">${x.size} (${x.price} ريال)</div><div class="qty"><button onclick="changeQty(${k},-1)">−</button><span>${x.qty}</span><button onclick="changeQty(${k},1)">+</button></div></div><div class="ciPrice">${x.price*x.qty} ريال</div></div>`).join(''):'<div style="padding:30px;text-align:center;color:#778">السلة فارغة 🛒</div>';document.getElementById('total').textContent=total+' ريال';updateCartCount()}
-function openCartMobile(){document.getElementById('cartM').classList.add('show');renderCart()}
-function sendOrder(){if(!cart.length)return alert('السلة فارغة');let name=document.getElementById('name').value||'عميل',phone=document.getElementById('phone').value||'',notes=document.getElementById('notes').value||'',total=cart.reduce((a,x)=>a+x.price*x.qty,0);let text='طلب جديد من تي بي سات%0A%0A'+cart.map(x=>`• ${x.name} - ${x.size} × ${x.qty} = ${x.price*x.qty} ريال`).join('%0A')+`%0A%0Aالإجمالي: ${total} ريال%0Aالاسم: ${encodeURIComponent(name)}%0Aالجوال: ${encodeURIComponent(phone)}%0Aنوع الطلب: ${orderType==='pickup'?'استلام من المحل':'توصيل للمنزل'}%0Aملاحظات: ${encodeURIComponent(notes)}`;location.href='https://wa.me/'+state.phone+'?text='+text}
-function closeM(id){document.getElementById(id).classList.remove('show')}
-function setType(t){orderType=t;document.getElementById('pickup').classList.toggle('on',t==='pickup');document.getElementById('delivery').classList.toggle('on',t==='delivery')}
-function renderAll(){renderCats();renderProducts();renderCart()}
-renderAll();
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#159447">
+<title>T3 - تي بي سات للعصائر</title>
 
-function openCartMobile(){document.getElementById('cartM').classList.add('show');let e=document.getElementById('cartItemsMobile');let total=cart.reduce((a,x)=>a+x.price*x.qty,0);e.innerHTML=cart.length?cart.map((x,k)=>`<div class="cartItem"><div class="thumb">🥤</div><div><div class="ciName">${x.name}</div><div class="ciSub">${x.size} — ${x.price} ريال</div><div class="qty"><button onclick="changeQty(${k},-1);openCartMobile()">−</button><span>${x.qty}</span><button onclick="changeQty(${k},1);openCartMobile()">+</button></div></div><div class="ciPrice">${x.price*x.qty}</div></div>`).join(''):`<div style="padding:25px;text-align:center">السلة فارغة</div>`}
-function mobileSend(){let n=document.getElementById('nameM').value||'عميل',p=document.getElementById('phoneM').value||'',m=document.getElementById('notesM').value||'',t=cart.reduce((a,x)=>a+x.price*x.qty,0);let msg='طلب جديد من تي بي سات%0A%0A'+cart.map(x=>`• ${x.name} - ${x.size} × ${x.qty} = ${x.price*x.qty} ريال`).join('%0A')+`%0A%0Aالإجمالي: ${t} ريال%0Aالاسم: ${encodeURIComponent(n)}%0Aالجوال: ${encodeURIComponent(p)}%0Aملاحظات: ${encodeURIComponent(m)}`;location.href='https://wa.me/'+state.phone+'?text='+msg}
-</script></body></html>
+<style>
+*{box-sizing:border-box}
+:root{
+--green:#159447;
+--dark:#087537;
+--red:#e51d2a;
+--orange:#f5a623;
+--bg:#f5f7f3;
+--text:#172019;
+--muted:#718078;
+--line:#e1e8e2;
+}
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:Tahoma,Arial,sans-serif;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.header{
+background:#fff;
+position:sticky;
+top:0;
+z-index:50;
+border-bottom:1px solid var(--line);
+}
+.head{
+height:78px;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+.logo{
+width:65px;
+height:65px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:25px;
+font-weight:1000;
+color:var(--green);
+border:4px solid var(--green);
+box-shadow:0 4px 15px #0001;
+}
+.logo span{color:var(--red)}
+.headbtn{
+position:absolute;
+width:44px;
+height:44px;
+border:0;
+border-radius:14px;
+background:#f1f5f1;
+font-size:22px;
+}
+.menu{right:15px}
+.cartbtn{left:15px}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 12px 100px;
+}
+
+.hero{
+margin:15px 0;
+border-radius:25px;
+min-height:220px;
+overflow:hidden;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+radial-gradient(circle at 15% 20%,#f7c94b 0 45px,transparent 46px),
+radial-gradient(circle at 85% 75%,#35a95b 0 70px,transparent 71px),
+linear-gradient(135deg,#fff7df,#e8f7e9);
+border:1px solid var(--line);
+}
+.hero:before{
+content:"🍓  🥭  🍊  🥝  🍉";
+position:absolute;
+font-size:40px;
+top:20px;
+left:15px;
+opacity:.8;
+}
+.hero:after{
+content:"🍋  🍍  🥑  🍇";
+position:absolute;
+font-size:38px;
+bottom:18px;
+right:15px;
+opacity:.8;
+}
+.heroText{text-align:center;position:relative;z-index:2}
+.badge{
+display:inline-block;
+background:#fff;
+padding:7px 15px;
+border-radius:30px;
+color:var(--dark);
+font-weight:bold;
+box-shadow:0 4px 15px #0001;
+}
+.hero h1{
+font-size:34px;
+margin:13px 0 6px;
+}
+.hero p{color:var(--muted);margin:0}
+
+.searchbox{
+margin:15px 0;
+position:relative;
+}
+.searchbox input{
+width:100%;
+padding:16px 50px 16px 18px;
+border:1px solid var(--line);
+border-radius:17px;
+background:#fff;
+outline:none;
+}
+.searchbox span{
+position:absolute;
+right:17px;
+top:12px;
+font-size:25px;
+}
+
+.categories{
+display:flex;
+gap:9px;
+overflow:auto;
+padding-bottom:8px;
+scrollbar-width:none;
+}
+.categories::-webkit-scrollbar{display:none}
+.category{
+min-width:120px;
+padding:12px;
+border:1px solid var(--line);
+background:#fff;
+border-radius:16px;
+text-align:center;
+font-weight:bold;
+}
+.category.active{
+background:var(--green);
+color:#fff;
+border-color:var(--green);
+}
+.category div{font-size:23px;margin-bottom:4px}
+
+.sectionTitle{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:20px 3px 12px;
+}
+.sectionTitle h2{margin:0;font-size:22px}
+.sectionTitle span{color:var(--green);font-size:13px;font-weight:bold}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+.card{
+background:#fff;
+border:1px solid var(--line);
+border-radius:19px;
+padding:9px;
+box-shadow:0 6px 18px #17371c0b;
+}
+.productVisual{
+height:140px;
+border-radius:14px;
+background:linear-gradient(145deg,#eff7ed,#fff);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+}
+.cup{
+width:75px;
+height:100px;
+border-radius:10px 10px 20px 20px;
+background:linear-gradient(90deg,#fff,#dff2e2,#fff);
+border:2px solid #ddd;
+box-shadow:0 10px 15px #0002;
+position:relative;
+}
+.cup:before{
+content:"";
+position:absolute;
+top:-7px;
+left:-5px;
+width:81px;
+height:18px;
+background:#fff;
+border:3px solid #ddd;
+border-radius:50%;
+}
+.cupLogo{
+position:absolute;
+top:40px;
+left:0;
+right:0;
+text-align:center;
+font-weight:1000;
+color:var(--green);
+}
+.fruit{
+position:absolute;
+font-size:42px;
+z-index:3;
+top:15px;
+}
+.name{
+font-weight:bold;
+font-size:15px;
+margin:9px 3px 7px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.sizes{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:4px;
+}
+.size{
+border:1px solid #e2e9e3;
+background:#fafcfa;
+border-radius:8px;
+padding:5px 2px;
+text-align:center;
+font-size:9px;
+color:var(--muted);
+}
+.size b{
+display:block;
+font-size:13px;
+color:var(--text);
+}
+.gallons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:4px;
+margin-top:4px;
+}
+.add{
+width:100%;
+border:0;
+background:var(--green);
+color:#fff;
+border-radius:10px;
+padding:9px 4px;
+margin-top:7px;
+font-weight:bold;
+font-size:12px;
+}
+.add:active{transform:scale(.97)}
+
+.cart{
+position:fixed;
+left:15px;
+bottom:15px;
+z-index:70;
+background:var(--green);
+color:#fff;
+border:0;
+border-radius:50px;
+padding:14px 20px;
+font-weight:bold;
+box-shadow:0 8px 25px #0003;
+}
+.cart span{
+background:#fff;
+color:var(--green);
+border-radius:50%;
+padding:3px 8px;
+margin-right:5px;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:#0008;
+z-index:100;
+display:none;
+align-items:flex-end;
+}
+.overlay.show{display:flex}
+.sheet{
+background:#fff;
+width:min(600px,100%);
+max-height:90vh;
+overflow:auto;
+border-radius:25px 25px 0 0;
+padding:18px;
+}
+.sheetHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+font-size:20px;
+font-weight:bold;
+}
+.close{
+border:0;
+background:#eee;
+border-radius:50%;
+width:38px;
+height:38px;
+}
+.cartRow{
+display:grid;
+grid-template-columns:55px 1fr auto;
+gap:9px;
+align-items:center;
+padding:10px 0;
+border-bottom:1px solid var(--line);
+}
+.cartThumb{
+width:55px;
+height:55px;
+border-radius:12px;
+background:#edf7ee;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+}
+.cartName{font-weight:bold;font-size:14px}
+.cartSub{font-size:11px;color:var(--muted);margin-top:4px}
+.qty{
+display:flex;
+gap:5px;
+align-items:center;
+margin-top:5px;
+}
+.qty button{
+width:25px;
+height:25px;
+border:0;
+border-radius:7px;
+background:#edf5ee;
+}
+.total{
+display:flex;
+justify-content:space-between;
+font-size:20px;
+font-weight:bold;
+padding:15px 0;
+}
+.field{
+width:100%;
+padding:12px;
+border:1px solid var(--line);
+border-radius:11px;
+margin:5px 0;
+outline:none;
+}
+.whatsapp{
+width:100%;
+border:0;
+background:#1eaa57;
+color:#fff;
+border-radius:12px;
+padding:13px;
+font-weight:bold;
+margin-top:8px;
+}
+.empty{
+text-align:center;
+padding:30px 10px;
+color:var(--muted);
+}
+.contact{
+margin-top:25px;
+background:#fff;
+border:1px solid var(--line);
+border-radius:20px;
+padding:20px;
+text-align:center;
+line-height:2;
+}
+.contact strong{font-size:17px}
+footer{
+text-align:center;
+color:var(--muted);
+padding:25px 10px;
+font-size:12px;
+}
+
+@media(max-width:950px){
+.grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:650px){
+.container{padding-left:8px;padding-right:8px}
+.hero{min-height:195px}
+.hero h1{font-size:25px}
+.hero:before,.hero:after{font-size:25px}
+.grid{
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+.productVisual{height:125px}
+.name{font-size:14px}
+.head{height:70px}
+.logo{width:57px;height:57px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<div class="head">
+<button class="headbtn menu" onclick="scrollToContact()">☰</button>
+
+<div class="logo">T<span>3</span></div>
+
+<button class="headbtn cartbtn" onclick="openCart()">🛒</button>
+</div>
+</header>
+
+<div class="container">
+
+<section class="hero">
+<div class="heroText">
+<div class="badge">T3 JUICE</div>
+<h1>تي بي سات للعصائر</h1>
+<p>أسرار المذاق في كل كوب 🍹</p>
+</div>
+</section>
+
+<div class="searchbox">
+<span>🔍</span>
+<input id="search" type="search" placeholder="ابحث عن أي صنف..." oninput="render()">
+</div>
+
+<div class="categories">
+<button class="category active" onclick="setCat('العصيرات',this)">
+<div>🥤</div>العصيرات
+</button>
+<button class="category" onclick="setCat('الخلطات الأخرى',this)">
+<div>🍊</div>الخلطات الأخرى
+</button>
+<button class="category" onclick="setCat('أصناف إضافية',this)">
+<div>✨</div>أصناف إضافية
+</button>
+</div>
+
+<div class="sectionTitle">
+<h2 id="sectionName">العصيرات</h2>
+<span id="count"></span>
+</div>
+
+<div id="products" class="grid"></div>
+
+<div id="contact" class="contact">
+<strong>📍 موقعنا</strong><br>
+جدة - البغدادية الغربية<br>
+شارع المدارس مع تقاطع نهج طيبة<br>
+خلف لولو هايبر ماركت
+<br><br>
+<strong>📞 +966 50 742 3329</strong>
+</div>
+
+<footer>
+T3 - تي بي سات للعصائر<br>
+أسرار المذاق 🍹
+</footer>
+
+</div>
+
+<button class="cart" onclick="openCart()">
+🛒 السلة <span id="cartCount">0</span>
+</button>
+
+<div id="overlay" class="overlay" onclick="outside(event)">
+<div class="sheet">
+
+<div class="sheetHead">
+<span>🛒 طلبك</span>
+<button class="close" onclick="closeCart()">×</button>
+</div>
+
+<div id="cartItems"></div>
+
+<div class="total">
+<span>الإجمالي</span>
+<span id="total">0 ريال</span>
+</div>
+
+<input id="customer" class="field" placeholder="الاسم الكامل">
+
+<input id="phone" class="field" placeholder="رقم الجوال" type="tel">
+
+<textarea id="notes" class="field" rows="3" placeholder="ملاحظات الطلب"></textarea>
+
+<button class="whatsapp" onclick="sendWhatsApp()">
+📱 إرسال الطلب عبر واتساب
+</button>
+
+</div>
+</div>
+
+<script>
+
+const products=[
+
+/* العصيرات */
+
+["عراسي سادة","🥭",[4,6,8,15,20],"العصيرات"],
+["عراسي شنقل","🥭",[5,7,9,20,25],"العصيرات"],
+["أفوكادو سادة","🥑",[5,7,9,20,25],"العصيرات"],
+["أفوكادو مانجو","🥑",[5,7,9,20,25],"العصيرات"],
+["أفوكادو مكسرات","🥑",[4,6,9,12,18],"العصيرات"],
+["مانجو سادة","🥭",[4,6,8,12,18],"العصيرات"],
+["مانجو حليب","🥭",[4,6,8,12,18],"العصيرات"],
+["شمام سادة","🍈",[4,5,7,12,18],"العصيرات"],
+["شمام حليب","🍈",[4,5,7,12,18],"العصيرات"],
+["شمام مانجو","🥭",[5,7,8,12,18],"العصيرات"],
+["كوكتيل","🍹",[4,6,8,12,18],"العصيرات"],
+["جبي","🍹",[4,6,8,12,18],"العصيرات"],
+["عربي","🍹",[4,6,8,12,18],"العصيرات"],
+["أصفهاني","🍹",[4,6,8,12,18],"العصيرات"],
+["جوافة سادة","🍐",[5,7,9,12,18],"العصيرات"],
+["جوافة مانجو","🥭",[4,6,8,12,18],"العصيرات"],
+["جوافة شمام","🍈",[4,6,8,12,18],"العصيرات"],
+["باباي","🍊",[4,6,8,12,18],"العصيرات"],
+["كيوي","🥝",[4,6,8,12,18],"العصيرات"],
+["عوار قلب","❤️",[4,6,8,12,18],"العصيرات"],
+["صندو","🍹",[4,6,8,12,18],"العصيرات"],
+["منقوع 2","🍹",[3,5,8,15,20],"العصيرات"],
+["منعنع سادة","🌿",[4,6,8,12,18],"العصيرات"],
+["منعنع كوكتيل","🌿",[4,6,8,12,18],"العصيرات"],
+["توت أزرق","🫐",[4,6,8,12,18],"العصيرات"],
+["بلاك بيري","🫐",[4,6,8,12,18],"العصيرات"],
+
+/* أصناف إضافية */
+
+["ليالي جدة","🍹",[4,6,8,12,18],"أصناف إضافية"],
+["لمسة عنب","🍇",[4,6,8,12,18],"أصناف إضافية"],
+["الأسطورة","✨",[4,6,8,12,18],"أصناف إضافية"],
+
+/* الخلطات الأخرى */
+
+["برتقال","🍊",[5,7,9],"الخلطات الأخرى"],
+["برتقال جزر","🥕",[5,7,9],"الخلطات الأخرى"],
+["أناناس","🍍",[4,6,8],"الخلطات الأخرى"],
+["رمان","🍎",[5,7,9],"الخلطات الأخرى"],
+["شمام","🍈",[4,6,8],"الخلطات الأخرى"],
+["شمام موز","🍌",[4,6,8],"الخلطات الأخرى"],
+["موز سادة","🍌",[3,5,7],"الخلطات الأخرى"],
+["موز حليب","🥛",[4,6,7],"الخلطات الأخرى"],
+["ليمون سادة","🍋",[3,5,7],"الخلطات الأخرى"],
+["ليمون عدني","🍋",[3,5,7],"الخلطات الأخرى"],
+["ليمون زنجبيل","🍋",[3,5,7],"الخلطات الأخرى"],
+["ليمون نعناع","🌿",[3,5,7],"الخلطات الأخرى"],
+["نعنع ماركس","🌿",[4,6,8],"الخلطات الأخرى"],
+["جزر","🥕",[4,6,8],"الخلطات الأخرى"],
+["شمام؟","🍈",[3,5,7],"الخلطات الأخرى"],
+["زنجبيل","🫚",[3,5,7],"الخلطات الأخرى"],
+["فراولة","🍓",[4,6,8],"الخلطات الأخرى"],
+["تفاح أحمر","🍎",[4,5,7],"الخلطات الأخرى"],
+["تفاح أخضر","🍏",[4,5,7],"الخلطات الأخرى"],
+["عنب","🍇",[4,5,8],"الخلطات الأخرى"]
+
+];
+
+let category="العصيرات";
+let cart=[];
+
+const sizes3=["صغير","وسط","كبير"];
+const sizes5=["صغير","وسط","كبير","جالون وسط","جالون كبير"];
+
+function setCat(cat,btn){
+category=cat;
+document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));
+btn.classList.add("active");
+document.getElementById("sectionName").textContent=cat;
+render();
+window.scrollTo({top:300,behavior:"smooth"});
+}
+
+function render(){
+
+const search=document.getElementById("search").value.trim().toLowerCase();
+
+const list=products.filter(p=>{
+return p[3]===category &&
+(!search || p[0].toLowerCase().includes(search));
+});
+
+document.getElementById("count").textContent=list.length+" صنف";
+
+const box=document.getElementById("products");
+
+if(!list.length){
+box.innerHTML='<div class="empty">😔<br>لا توجد أصناف مطابقة للبحث</div>';
+return;
+}
+
+box.innerHTML=list.map((p,index)=>{
+
+const prices=p[2];
+const sizes=prices.length===5?sizes5:sizes3;
+
+let html="";
+
+prices.forEach((price,i)=>{
+html+=`
+<button class="size" onclick="addItem('${escapeJS(p[0])}','${sizes[i]}',${price},'${p[1]}')">
+${sizes[i]}<b>${price}</b>
+</button>`;
+});
+
+return `
+<div class="card">
+<div class="productVisual">
+<div class="fruit">${p[1]}</div>
+<div class="cup">
+<div class="cupLogo">T3</div>
+</div>
+</div>
+
+<div class="name" title="${p[0]}">${p[0]}</div>
+
+<div class="sizes">${html}</div>
+
+<button class="add" onclick="quickAdd('${escapeJS(p[0])}',${prices[1]||prices[0]},'${p[1]}')">
++ أضف للطلب
+</button>
+
+</div>`;
+}).join("");
+}
+
+function escapeJS(s){
+return s.replace(/'/g,"\\'");
+}
+
+function quickAdd(name,price,emoji){
+addItem(name,"وسط",price,emoji);
+}
+
+function addItem(name,size,price,emoji){
+
+let found=cart.find(x=>x.name===name&&x.size===size);
+
+if(found)found.qty++;
+else cart.push({name,size,price,emoji,qty:1});
+
+updateCart();
+}
+
+function updateCart(){
+
+document.getElementById("cartCount").textContent=
+cart.reduce((a,b)=>a+b.qty,0);
+
+let box=document.getElementById("cartItems");
+
+if(!cart.length){
+box.innerHTML='<div class="empty">🛒<br>السلة فارغة<br><small>اختر أي عصير لإضافته للطلب</small></div>';
+document.getElementById("total").textContent="0 ريال";
+return;
+}
+
+box.innerHTML=cart.map((x,i)=>`
+<div class="cartRow">
+
+<div class="cartThumb">${x.emoji}</div>
+
+<div>
+<div class="cartName">${x.name}</div>
+<div class="cartSub">${x.size} — ${x.price} ريال</div>
+
+<div class="qty">
+<button onclick="changeQty(${i},-1)">−</button>
+<b>${x.qty}</b>
+<button onclick="changeQty(${i},1)">+</button>
+</div>
+</div>
+
+<strong>${x.price*x.qty} ريال</strong>
+
+</div>
+`).join("");
+
+let total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+document.getElementById("total").textContent=total+" ريال";
+}
+
+function changeQty(i,n){
+cart[i].qty+=n;
+if(cart[i].qty<=0)cart.splice(i,1);
+updateCart();
+}
+
+function openCart(){
+updateCart();
+document.getElementById("overlay").classList.add("show");
+}
+
+function closeCart(){
+document.getElementById("overlay").classList.remove("show");
+}
+
+function outside(e){
+if(e.target.id==="overlay")closeCart();
+}
+
+function sendWhatsApp(){
+
+if(!cart.length){
+alert("السلة فارغة");
+return;
+}
+
+const name=document.getElementById("customer").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const notes=document.getElementById("notes").value.trim();
+
+if(!name){
+alert("اكتب اسمك أولاً");
+return;
+}
+
+let total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+
+let text="*طلب جديد من T3 🍹*%0A%0A";
+text+="الاسم: "+encodeURIComponent(name)+"%0A";
+text+="الجوال: "+encodeURIComponent(phone)+"%0A%0A";
+text+="*الطلب:*%0A";
+
+cart.forEach(x=>{
+text+="• "+encodeURIComponent(x.name)+" - "+encodeURIComponent(x.size)+" × "+x.qty+" = "+(x.price*x.qty)+" ريال%0A";
+});
+
+text+="%0A*الإجمالي: "+total+" ريال*%0A";
+
+if(notes){
+text+="%0Aملاحظات: "+encodeURIComponent(notes);
+}
+
+window.open("https://wa.me/966507423329?text="+text,"_blank");
+}
+
+function scrollToContact(){
+document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+}
+
+render();
+updateCart();
+
+</script>
+
+</body>
+</html>
